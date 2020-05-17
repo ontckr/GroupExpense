@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "282874110643",
+    "firebase_url": "https://groupexpenseapp-9944b.firebaseio.com",
+    "project_id": "groupexpenseapp-9944b",
+    "storage_bucket": "groupexpenseapp-9944b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:282874110643:android:f649f468a568b9c05886c6",
+        "android_client_info": {
+          "package_name": "com.example.group_expense"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "282874110643-segnfuks0jqdao9m6k2fe65kkrsq7int.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjVaDcMwAnN76skdzX-GCLGn153eKyFN4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "282874110643-segnfuks0jqdao9m6k2fe65kkrsq7int.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
