@@ -15,10 +15,9 @@ dependencies:
   firebase_core: ^0.4.4+3
   firebase_auth: ^0.16.0
   google_sign_in: ^4.4.4
-  graphql_flutter: ^3.0.1
-  provider: ^4.0.2
-
-
+  font_awesome_flutter: ^8.0.1
+  flutter_auth_buttons: ^0.8.0
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -26,3 +25,20 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  fonts:
+    - family: WorkSansSemiBold
+      fonts:
+        - asset: assets/font/WorkSans-SemiBold.ttf
+
+    - family: WorkSansBold
+      fonts:
+        - asset: assets/font/WorkSans-Bold.ttf
+
+    - family: WorkSansMedium
+      fonts:
+        - asset: assets/font/WorkSans-Medium.ttf
+
+    - family: WorkSansItalic
+      fonts:
+        - asset: assets/font/WorkSans-Italic.ttf
