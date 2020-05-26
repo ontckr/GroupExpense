@@ -80,7 +80,7 @@ class _GroupUsersState extends State<GroupUsers> {
         itemBuilder: (BuildContext context, int index) {
           var user = group.data["users"][index];
           return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 5),
             child: Card(
               elevation: 6,
               shape: RoundedRectangleBorder(

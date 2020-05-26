@@ -71,6 +71,16 @@ class _AddExpenseState extends State<AddExpense> {
                 fontSize: 24,
               ),
             ),
+            actions: <Widget>[
+              IconButton(
+                icon: Icon(
+                  FontAwesomeIcons.check,
+                  color: Colors.black,
+                  size: 26,
+                ),
+                onPressed: () {addExpense();},
+              ),
+            ],
           ),
         ),
       ),
@@ -188,23 +198,23 @@ class _AddExpenseState extends State<AddExpense> {
           ),
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton.extended(
-        icon: Icon(
-          FontAwesomeIcons.plus,
-          size: 19,
-        ),
-        backgroundColor: Colors.blueAccent,
-        label: Text(
-          "Add",
-          style: TextStyle(
-            fontSize: 18,
-          ),
-        ),
-        onPressed: () {
-          addExpense();
-        },
-      ),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      // floatingActionButton: FloatingActionButton.extended(
+      //   icon: Icon(
+      //     FontAwesomeIcons.plus,
+      //     size: 19,
+      //   ),
+      //   backgroundColor: Colors.blueAccent,
+      //   label: Text(
+      //     "Add",
+      //     style: TextStyle(
+      //       fontSize: 18,
+      //     ),
+      //   ),
+      //   onPressed: () {
+      //     addExpense();
+      //   },
+      // ),
     );
   }
 }
