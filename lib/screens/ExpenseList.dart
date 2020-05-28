@@ -4,8 +4,9 @@ import 'package:group_expense/screens/DetailPage.dart';
 
 class Expenses extends StatefulWidget {
   final QuerySnapshot expenses;
+  final DocumentSnapshot group;
 
-  const Expenses({Key key, this.expenses}) : super(key: key);
+  const Expenses({Key key, this.expenses, this.group}) : super(key: key);
   @override
   _ExpensesState createState() => _ExpensesState();
 }
@@ -22,7 +23,13 @@ class _ExpensesState extends State<Expenses> {
   @override
   Widget build(BuildContext context) {
     if (expenses == null || expenses.documents.isEmpty) {
-      return Text("No expense found");
+      return Text(
+        "No expense found!",
+        style: TextStyle(
+          fontSize: 18,
+          fontFamily: "WorkSansSemiBold",
+        ),
+      );
     } else {
       return ListView.builder(
         itemCount: expenses.documents.length,
@@ -42,6 +49,7 @@ class _ExpensesState extends State<Expenses> {
                     MaterialPageRoute(
                       builder: (context) => ExpenseDetail(
                         expense: expense,
+                        group: widget.group,
                       ),
                     ),
                   );

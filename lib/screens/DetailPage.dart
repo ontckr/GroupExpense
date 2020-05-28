@@ -1,11 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:group_expense/screens/GroupPage.dart';
 
 class ExpenseDetail extends StatefulWidget {
+  final DocumentSnapshot group;
   final DocumentSnapshot expense;
 
-  const ExpenseDetail({Key key, this.expense}) : super(key: key);
+  const ExpenseDetail({Key key, this.expense, this.group}) : super(key: key);
   @override
   _ExpenseDetailState createState() => _ExpenseDetailState();
 }
@@ -39,6 +41,73 @@ class _ExpenseDetailState extends State<ExpenseDetail> {
                 fontSize: 24,
               ),
             ),
+            actions: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: IconButton(
+                  icon: Icon(
+                    FontAwesomeIcons.trashAlt,
+                    color: Colors.red[400],
+                  ),
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(15),
+                            ),
+                          ),
+                          title: Text(
+                            "Do you want to delete?",
+                            style: TextStyle(
+                              fontSize: 19,
+                              fontFamily: "WorkSansSemiBold",
+                            ),
+                          ),
+                          actions: <Widget>[
+                            FlatButton(
+                              child: Text(
+                                "Cancel",
+                                style: TextStyle(
+                                  color: Colors.blueAccent,
+                                  fontSize: 19,
+                                  fontFamily: "WorkSansSemiBold",
+                                ),
+                              ),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                            FlatButton(
+                              child: Text(
+                                "Delete",
+                                style: TextStyle(
+                                  color: Colors.red,
+                                  fontSize: 19,
+                                  fontFamily: "WorkSansSemiBold",
+                                ),
+                              ),
+                              onPressed: () async {
+                                await widget.expense.reference.delete();
+                                Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                    builder: (BuildContext context) {
+                                      return GroupPage(group: widget.group);
+                                    },
+                                  ),
+                                );
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  },
+                ),
+              )
+            ],
           ),
         ),
       ),
