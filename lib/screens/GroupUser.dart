@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:group_expense/screens/AddUser.dart';
+import 'package:group_expense/screens/GroupPage.dart';
 
 class GroupUsers extends StatefulWidget {
   final DocumentSnapshot group;
@@ -36,7 +37,13 @@ class _GroupUsersState extends State<GroupUsers> {
                 size: 30,
               ),
               onPressed: () {
-                Navigator.of(context).pop(group);
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) {
+                      return GroupPage(group: group);
+                    },
+                  ),
+                );
               },
             ),
             elevation: 0,
@@ -104,19 +111,68 @@ class _GroupUsersState extends State<GroupUsers> {
                           FontAwesomeIcons.trashAlt,
                           color: Colors.red[200],
                         ),
-                        onPressed: () async {
-                          await group.reference.updateData({
-                            "users": FieldValue.arrayRemove([
-                              {
-                                "displayName": user["displayName"],
-                                "uid": user["uid"],
-                                "photoURL": user["photoURL"]
-                              }
-                            ]),
-                            "userIds": FieldValue.arrayUnion([user["uid"]])
-                          });
-                          group = await group.reference.get();
-                          setState(() {});
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(15),
+                                  ),
+                                ),
+                                title: Text(
+                                  "Do you want to delete?",
+                                  style: TextStyle(
+                                    fontSize: 19,
+                                    fontFamily: "WorkSansSemiBold",
+                                  ),
+                                ),
+                                actions: <Widget>[
+                                  FlatButton(
+                                    child: Text(
+                                      "Cancel",
+                                      style: TextStyle(
+                                        color: Colors.blueAccent,
+                                        fontSize: 19,
+                                        fontFamily: "WorkSansSemiBold",
+                                      ),
+                                    ),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                  FlatButton(
+                                    child: Text(
+                                      "Delete",
+                                      style: TextStyle(
+                                        color: Colors.red,
+                                        fontSize: 19,
+                                        fontFamily: "WorkSansSemiBold",
+                                      ),
+                                    ),
+                                    onPressed: () async {
+                                      await group.reference.updateData({
+                                        "users": FieldValue.arrayRemove([
+                                          {
+                                            "displayName": user["displayName"],
+                                            "uid": user["uid"],
+                                            "photoURL": user["photoURL"]
+                                          }
+                                        ]),
+                                        "userIds": FieldValue.arrayRemove(
+                                            [user["uid"]])
+                                      });
+                                      group = await group.reference.get();
+                                      Navigator.of(context).pop();
+
+                                      setState(() {});
+                                    },
+                                  ),
+                                ],
+                              );
+                            },
+                          );
                         },
                       )
                     : null,

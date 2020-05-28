@@ -19,9 +19,6 @@ class _TotalExpenseInfoState extends State<TotalExpenseInfo>
   DocumentSnapshot group;
   TabController _tabController;
 
-  int cupertinoTabBarIIIValue = 3;
-  int cupertinoTabBarIIIValueGetter() => cupertinoTabBarIIIValue;
-
   @override
   void initState() {
     super.initState();
@@ -153,6 +150,32 @@ class _TotalExpenseInfoState extends State<TotalExpenseInfo>
                             ),
                           ),
                         ),
+                         Card(
+                          elevation: 6,
+                          shape: ContinuousRectangleBorder(
+                            borderRadius: BorderRadius.circular(40.0),
+                          ),
+                          child: ListTile(
+                            title: Padding(
+                              padding: const EdgeInsets.only(left: 20),
+                              child: Text(
+                                "Onat Çakır",
+                                style: TextStyle(
+                                  fontFamily: "WorkSansSemiBold",
+                                  fontSize: 20,
+                                ),
+                              ),
+                            ),
+                            trailing: Text(
+                              "+ 60 ₺",
+                              style: TextStyle(
+                                color: Colors.green[600],
+                                fontSize: 18,
+                                fontFamily: "WorkSansSemiBold",
+                              ),
+                            ),
+                          ),
+                        ),
                         SizedBox(
                           height: 24,
                         ),
@@ -184,7 +207,7 @@ class _TotalExpenseInfoState extends State<TotalExpenseInfo>
                               ),
                             ),
                             trailing: Text(
-                              "- 200 ₺",
+                              "- 260 ₺",
                               style: TextStyle(
                                 color: Colors.red[600],
                                 fontSize: 18,
@@ -239,6 +262,49 @@ class _TotalExpenseInfoState extends State<TotalExpenseInfo>
                               ),
                               trailing: Text(
                                 "200 ₺",
+                                style: TextStyle(
+                                  color: Colors.blueAccent,
+                                  fontSize: 19,
+                                  fontFamily: "WorkSansSemiBold",
+                                ),
+                              ),
+                            ),
+                          ),
+                          Card(
+                            elevation: 6,
+                            shape: ContinuousRectangleBorder(
+                              borderRadius: BorderRadius.circular(40.0),
+                            ),
+                            child: ListTile(
+                              title: RichText(
+                                text: TextSpan(
+                                  text: "Morpheus",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontFamily: "WorkSansSemiBold",
+                                    fontSize: 17,
+                                  ),
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                      text: ' owes ',
+                                      style: TextStyle(
+                                        fontFamily: "WorkSansSemiBold",
+                                        color: Colors.red[400],
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      text: 'Onat Çakır',
+                                      style: TextStyle(
+                                        fontFamily: "WorkSansSemiBold",
+                                        fontSize: 17,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              trailing: Text(
+                                "60 ₺",
                                 style: TextStyle(
                                   color: Colors.blueAccent,
                                   fontSize: 19,

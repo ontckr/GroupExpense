@@ -92,6 +92,7 @@ class _GroupPageState extends State<GroupPage>
                       flex: 4,
                       child: Expenses(
                         expenses: snapshot.data,
+                        group: group,
                       ),
                     ),
                   ],
