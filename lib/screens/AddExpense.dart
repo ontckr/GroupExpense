@@ -1,3 +1,4 @@
+import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -21,6 +22,19 @@ class _AddExpenseState extends State<AddExpense> {
   addExpense() async {
     if (formKey.currentState.validate()) {
       try {
+        if (paidFor.isEmpty) {
+          Flushbar(
+            icon: Icon(
+              FontAwesomeIcons.exclamationCircle,
+              color: Colors.white,
+            ),
+            title: "Warning",
+            message: "Select at least one user!",
+            duration: Duration(seconds: 3),
+          )..show(context);
+          return;
+        }
+
         var user = await FirebaseAuth.instance.currentUser();
 
         await widget.group.reference.collection("expenses").add(
@@ -78,7 +92,9 @@ class _AddExpenseState extends State<AddExpense> {
                   color: Colors.black,
                   size: 26,
                 ),
-                onPressed: () {addExpense();},
+                onPressed: () {
+                  addExpense();
+                },
               ),
             ],
           ),

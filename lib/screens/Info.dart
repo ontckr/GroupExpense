@@ -43,7 +43,6 @@ class _InfoState extends State<Info> {
                   },
                 ),
               );
-              print("total spend pressed");
             },
             child: Container(
               child: Column(
@@ -116,19 +115,21 @@ class _InfoState extends State<Info> {
                   Text(
                     "${group.data['users'].length}",
                     style: TextStyle(
-                        fontSize: 37,
-                        fontFamily: "WorkSansBold",
-                        color: Colors.black),
+                      fontSize: 37,
+                      fontFamily: "WorkSansBold",
+                      color: Colors.black,
+                    ),
                   ),
                   SizedBox(
                     height: 12,
                   ),
                   Text(
-                    "Participans",
+                    "Participants",
                     style: TextStyle(
-                        fontSize: 14,
-                        fontFamily: "WorkSansMedium",
-                        color: Colors.black),
+                      fontSize: 14,
+                      fontFamily: "WorkSansMedium",
+                      color: Colors.black,
+                    ),
                   )
                 ],
               ),

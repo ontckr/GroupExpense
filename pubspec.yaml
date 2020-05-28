@@ -17,7 +17,8 @@ dependencies:
   google_sign_in: ^4.4.4
   font_awesome_flutter: ^8.0.1
   flutter_auth_buttons: ^0.8.0
-  
+  flushbar: ^1.10.4
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

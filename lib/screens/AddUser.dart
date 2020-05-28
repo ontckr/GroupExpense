@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class AddUser extends StatefulWidget {
   final DocumentSnapshot group;
@@ -20,8 +22,16 @@ class _AddUserState extends State<AddUser> {
           .where("email", isEqualTo: email.text)
           .getDocuments();
       if (result.documents.isEmpty) {
-        //TODO:user bulunamadi ekran tasarimi 
-        print("User not found");
+       Flushbar(
+            icon: Icon(
+              FontAwesomeIcons.exclamationCircle,
+              color: Colors.white,
+            ),
+            title: "Warning",
+            message: "Can't find user!",
+            duration: Duration(seconds: 3),
+          )..show(context);
+          
       } else {
         var user = result.documents[0];
         var groupRef = widget.group.reference;
@@ -62,7 +72,9 @@ class _AddUserState extends State<AddUser> {
                 Text(
                   "Add User",
                   style: TextStyle(
-                      fontSize: 20, color: Theme.of(context).primaryColor),
+                    fontSize: 20,
+                    color: Theme.of(context).primaryColor,
+                  ),
                 ),
                 SizedBox(
                   height: 20,
