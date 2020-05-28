@@ -92,7 +92,7 @@ class _LoginState extends State<Login> {
               ),
               Spacer(),
               Padding(
-                padding: const EdgeInsets.only(bottom: 40),
+                padding: const EdgeInsets.only(bottom: 80),
                 child: Container(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -107,19 +107,24 @@ class _LoginState extends State<Login> {
                       Text(
                         "#EvdeKal",
                         style: TextStyle(
-                            fontSize: 28, fontFamily: "WorkSansSemiBold"),
+                          fontSize: 28,
+                          fontFamily: "WorkSansSemiBold",
+                        ),
                       ),
                     ],
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  bottom: 8,
-                  right: 15,
-                ),
-                child: Icon(FontAwesomeIcons.hooli, size: 45),
-              )
+              // Padding(
+              //   padding: const EdgeInsets.only(
+              //     bottom: 8,
+              //     right: 15,
+              //   ),
+              //   child: Icon(
+              //     FontAwesomeIcons.hooli,
+              //     size: 45,
+              //   ),
+              // )
             ],
           ),
         ),
