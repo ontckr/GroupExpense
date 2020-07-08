@@ -43,12 +43,30 @@ class _AddExpenseState extends State<AddExpense> {
             "amount": int.parse(amount.text),
             "paidBy": {
               "uid": user.uid,
-              "displayName": user.displayName,
+              "displayName": user.sdisplayName,
               "photoURL": user.photoUrl
             },
-            "paidFor": paidFor
+            "paidFor": paidFor,
           },
         );
+
+        // for (var usr in paidFor) {
+        //   if (user.uid != usr["uid"]) {
+        //     await widget.group.reference.collection("balance").add(
+        //       {
+        //         "paidBy": {
+        //           "uid": user.uid,
+        //           "displayName": user.sdisplayName,
+        //         },
+        //         "paidFor": {
+        //           "uid": usr["uid"],
+        //           "displayName": usr["displayName"],
+        //         },
+        //         "amount": int.parse(amount.text) / paidFor.length
+        //       },
+        //     );
+        //   }
+        // }
 
         Navigator.of(context).pop();
       } catch (e) {
@@ -199,7 +217,8 @@ class _AddExpenseState extends State<AddExpense> {
                               paidFor.add({
                                 "uid": user["uid"],
                                 "displayName": user["displayName"],
-                                "photoURL": user["photoURL"]
+                                "photoURL": user["photoURL"],
+                                "paid": false
                               });
                             }
                             setState(() {});
