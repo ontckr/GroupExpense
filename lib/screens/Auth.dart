@@ -147,7 +147,7 @@ class _LoginState extends State<Login> {
 
     final FirebaseUser user =
         (await _auth.signInWithCredential(credential)).user;
-    print("signed in " + user.displayName);
+    print("signed in " + user.sdisplayName);
     return user;
   }
 }

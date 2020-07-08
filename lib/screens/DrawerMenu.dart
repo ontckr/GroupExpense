@@ -236,7 +236,7 @@ class _DrawerMenuState extends State<DrawerMenu> {
                                         bottom: 5,
                                       ),
                                       child: Text(
-                                        firebaseUser.displayName,
+                                        firebaseUser.sdisplayName,
                                         style: TextStyle(
                                           fontSize: 20,
                                           fontFamily: "WorkSansMedium",

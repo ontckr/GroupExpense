@@ -24,7 +24,7 @@ class _CreateGroupState extends State<CreateGroup> {
           "name": name.text,
           "users": FieldValue.arrayUnion([
             {
-              "displayName": user.displayName,
+              "displayName": user.sdisplayName,
               "uid": user.uid,
               "photoURL": user.photoUrl
             }
