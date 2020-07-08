@@ -59,45 +59,47 @@ class _GroupPageState extends State<GroupPage>
           ),
         ),
       ),
-      body: FutureBuilder(
-        future: future,
+      body: StreamBuilder<QuerySnapshot>(
+        stream: Firestore.instance
+            .collection("groups")
+            .document(widget.group.documentID)
+            .collection("expenses")
+            .snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (snapshot.hasError) return new Text('Error: ${snapshot.error}');
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
-              return Center(
-                child: CircularProgressIndicator(),
-              );
+              return new Text('Loading...');
             default:
-              if (snapshot.hasError) {
-                return Center(child: Text('Error'));
-              } else {
-                double totalAmount = 0;
-                snapshot.data.documents.forEach((element) {
-                  totalAmount += element.data["amount"];
-                });
-                return Column(
-                  children: <Widget>[
-                    Expanded(
-                      child: Info(
-                        group: group,
-                        totalAmount: totalAmount,
-                        expenses: snapshot.data,
-                      ),
-                      flex: 1,
+              print("heheh update");
+              double totalAmount = 0;
+              List<DocumentSnapshot> expenses = [];
+              snapshot.data.documents.forEach((element) {
+                totalAmount += element.data["amount"];
+                expenses.add(element);
+              });
+              return Column(
+                children: <Widget>[
+                  Expanded(
+                    child: Info(
+                      group: group,
+                      totalAmount: totalAmount,
+                      expenses: expenses,
                     ),
-                    SizedBox(
-                      height: 10,
+                    flex: 1,
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Expanded(
+                    flex: 4,
+                    child: Expenses(
+                      expenses: expenses,
+                      group: group,
                     ),
-                    Expanded(
-                      flex: 4,
-                      child: Expenses(
-                        expenses: snapshot.data,
-                        group: group,
-                      ),
-                    ),
-                  ],
-                );
-              }
+                  ),
+                ],
+              );
           }
         },
       ),

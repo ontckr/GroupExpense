@@ -6,7 +6,7 @@ import 'package:group_expense/screens/TotalExpense.dart';
 class Info extends StatefulWidget {
   final DocumentSnapshot group;
   final double totalAmount;
-  final QuerySnapshot expenses;
+  final List<DocumentSnapshot> expenses;
 
   const Info({Key key, this.group, this.totalAmount, this.expenses})
       : super(key: key);
@@ -39,6 +39,7 @@ class _InfoState extends State<Info> {
                     return TotalExpenseInfo(
                       group: group,
                       totalAmount: widget.totalAmount,
+                      expenses: widget.expenses,
                     );
                   },
                 ),

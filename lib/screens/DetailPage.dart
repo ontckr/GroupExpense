@@ -13,6 +13,14 @@ class ExpenseDetail extends StatefulWidget {
 }
 
 class _ExpenseDetailState extends State<ExpenseDetail> {
+  DocumentSnapshot expense;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    expense = widget.expense;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -240,18 +248,40 @@ class _ExpenseDetailState extends State<ExpenseDetail> {
                   right: 8,
                 ),
                 child: ListView.builder(
-                  itemCount: widget.expense.data["paidFor"].length,
+                  itemCount: expense.data["paidFor"].length,
                   itemBuilder: (BuildContext context, int index) {
-                    var user = widget.expense.data["paidFor"][index];
+                    var data = expense.data["paidFor"];
+                    var user = data[index];
                     return Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 10, vertical: 5),
                       child: Card(
                         elevation: 6,
+                        color: user["paid"] ? Colors.green : Colors.white,
                         shape: ContinuousRectangleBorder(
                           borderRadius: BorderRadius.circular(40.0),
                         ),
                         child: ListTile(
+                          onTap: () async {
+                            String paidBy = expense.data["paidBy"]["uid"];
+
+                            if (paidBy == user["uid"]) {
+                              return;
+                            }
+
+                            if (user["paid"] == false) {
+                              user["paid"] = true;
+                              await expense.reference
+                                  .updateData({"paidFor": data});
+                            } else {
+                              user["paid"] = false;
+
+                              await expense.reference
+                                  .updateData({"paidFor": data});
+                            }
+                            expense = await expense.reference.get();
+                            setState(() {});
+                          },
                           leading: CircleAvatar(
                             backgroundImage: NetworkImage(user["photoURL"]),
                           ),

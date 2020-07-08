@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:group_expense/screens/DetailPage.dart';
 
 class Expenses extends StatefulWidget {
-  final QuerySnapshot expenses;
+  final List<DocumentSnapshot> expenses;
   final DocumentSnapshot group;
 
   const Expenses({Key key, this.expenses, this.group}) : super(key: key);
@@ -12,17 +12,9 @@ class Expenses extends StatefulWidget {
 }
 
 class _ExpensesState extends State<Expenses> {
-  QuerySnapshot expenses;
-
-  @override
-  void initState() {
-    super.initState();
-    expenses = widget.expenses;
-  }
-
   @override
   Widget build(BuildContext context) {
-    if (expenses == null || expenses.documents.isEmpty) {
+    if (widget.expenses == null || widget.expenses.isEmpty) {
       return Text(
         "No expense found!",
         style: TextStyle(
@@ -32,9 +24,9 @@ class _ExpensesState extends State<Expenses> {
       );
     } else {
       return ListView.builder(
-        itemCount: expenses.documents.length,
+        itemCount: widget.expenses.length,
         itemBuilder: (BuildContext context, int index) {
-          DocumentSnapshot expense = expenses.documents[index];
+          DocumentSnapshot expense = widget.expenses[index];
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             child: Card(
@@ -67,6 +59,7 @@ class _ExpensesState extends State<Expenses> {
                 subtitle: Text(
                   expense["paidBy"]["displayName"],
                   style: TextStyle(
+                    
                     fontSize: 15,
                     fontFamily: "WorkSansMedium",
                   ),
